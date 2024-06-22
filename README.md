@@ -19,7 +19,7 @@ LinkUp is an Android social networking application that allows users to share po
 
 1. Clone the repository
     ```bash
-    git clone https://github.com/yourusername/LinkUp.git
+    git clone https://github.com/vivekupasani/LinkUp.git
     cd LinkUp
     ```
 
