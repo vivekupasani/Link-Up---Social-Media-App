@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1098557461237",
+    "project_id": "link-up-34d72",
+    "storage_bucket": "link-up-34d72.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1098557461237:android:5b7d3d1b097e28bdfcabbc",
+        "android_client_info": {
+          "package_name": "com.vivekupasani.linkup"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCj43Alx6o3pPAfXm3iilXM4r7se09dPbE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
