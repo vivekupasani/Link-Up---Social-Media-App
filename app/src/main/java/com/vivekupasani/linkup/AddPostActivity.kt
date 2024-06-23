@@ -1,10 +1,12 @@
 package com.vivekupasani.linkup
 
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.widget.Toast
+import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -14,10 +16,10 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.vivekupasani.linkup.databinding.ActivityAddpostBinding
-import com.vivekupasani.linkup.models.postModel
-import com.vivekupasani.linkup.models.userModel
+import com.vivekupasani.linkup.models.PostModel
+import com.vivekupasani.linkup.models.UserModel
 
-class addPostActivity : AppCompatActivity() {
+class AddPostActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityAddpostBinding
     private var postUri: Uri? = null
@@ -28,7 +30,7 @@ class addPostActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+        enableEdgeToEdge(SystemBarStyle.dark(Color.TRANSPARENT))
         binding = ActivityAddpostBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -59,7 +61,7 @@ class addPostActivity : AppCompatActivity() {
                 .get()
                 .addOnSuccessListener { document ->
                     if (document != null) {
-                        val user = document.toObject(userModel::class.java)
+                        val user = document.toObject(UserModel::class.java)
                         if (user != null) {
                             uploadToFirestore(user)
                         } else {
@@ -73,7 +75,7 @@ class addPostActivity : AppCompatActivity() {
         }
     }
 
-    private fun uploadToFirestore(user: userModel) {
+    private fun uploadToFirestore(user: UserModel) {
         setProgressBar(true)
         postUri?.let {
             val fileReference = storageReference.child(auth.currentUser!!.uid + System.currentTimeMillis())
@@ -82,7 +84,7 @@ class addPostActivity : AppCompatActivity() {
                     fileReference.downloadUrl.addOnSuccessListener { url ->
                         val caption = binding.postCaption.text.toString()
                         val postId = auth.currentUser!!.uid + System.currentTimeMillis().toString()
-                        val post = postModel(postId, auth.currentUser!!.uid, user.name, user.profilePic, caption, url.toString(),System.currentTimeMillis())
+                        val post = PostModel(postId, auth.currentUser!!.uid, user.name, user.profilePic, caption, url.toString(),System.currentTimeMillis())
 
                         firestore.collection("Posts")
                             .document(postId)

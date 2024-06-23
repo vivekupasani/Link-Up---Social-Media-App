@@ -1,7 +1,7 @@
 package com.vivekupasani.linkup.models
 
 
-data class postModel(
+data class PostModel(
     val postId: String? = null,
     val userId: String? = null,
     val name : String? = null,

@@ -1,64 +1,61 @@
 package com.vivekupasani.linkup
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
-import android.widget.Toast
+import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI.onNavDestinationSelected
+import androidx.navigation.ui.setupWithNavController
 import com.vivekupasani.linkup.databinding.ActivityMainBinding
-import com.vivekupasani.linkup.fragments.Home
-import com.vivekupasani.linkup.fragments.Profile
-import com.vivekupasani.linkup.fragments.Search
+
 
 class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
+
+    private var previousItemId: Int = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+        enableEdgeToEdge(SystemBarStyle.dark(Color.TRANSPARENT))
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Set the default fragment to Home when the app opens
-        if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.framelayout, Home())
-                .commit()
-        }
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(binding.framelayout.id) as NavHostFragment
 
-        // Fragment changing from navBar
-        replaceFragment()
+        val navController = navHostFragment.navController
 
+        binding.bottomNavigationView.setupWithNavController(navController)
 
+        // Initialize the previousItemId with the default selected item
+        previousItemId = binding.bottomNavigationView.selectedItemId;
 
-    }
+        // Custom Navigation Logic
+        binding.bottomNavigationView.setOnItemSelectedListener { item ->
+            if (item.itemId == R.id.addPost) {
+                // Handle the menu item to open Activity
+                val intent = Intent(
+                    this@MainActivity,
+                    AddPostActivity::class.java
+                )
+                startActivity(intent)
+                binding.bottomNavigationView.menu.findItem(previousItemId).setChecked(true);
+                false // Return false to avoid changing the selected item
+            } else {
 
-    private fun replaceFragment() {
-        binding.bottomNavigationView.setOnItemSelectedListener {
-            val transaction = supportFragmentManager.beginTransaction()
-            when (it.itemId) {
-                R.id.home -> {
-                    transaction.replace(R.id.framelayout, Home())
-                }
+                // Update the previousItemId before navigation
+                previousItemId = item.itemId;
 
-                R.id.search -> {
-                    transaction.replace(R.id.framelayout, Search())
-                }
-
-                R.id.add -> {
-                    startActivity(Intent(this,addPostActivity::class.java))
-                }
-
-                R.id.notification -> {
-                    Toast.makeText(this, "Clicked notification", Toast.LENGTH_SHORT).show()
-                }
-
-                R.id.profile -> {
-                    transaction.replace(R.id.framelayout, Profile())
-                }
+                // For other items, let NavController handle them
+                (onNavDestinationSelected(item, navController)
+                        || super.onOptionsItemSelected(item))
             }
-            transaction.commit()
-            true
         }
+
     }
+
 }

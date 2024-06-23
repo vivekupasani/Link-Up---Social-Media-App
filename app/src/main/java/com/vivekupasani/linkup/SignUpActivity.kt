@@ -1,20 +1,18 @@
 package com.vivekupasani.linkup
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Patterns
-import android.util.Patterns.*
 import android.view.View
 import android.widget.Toast
+import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.vivekupasani.linkup.databinding.ActivitySignUpBinding
-import com.vivekupasani.linkup.models.userModel
-import java.util.regex.Pattern
+import com.vivekupasani.linkup.models.UserModel
 
 class SignUpActivity : AppCompatActivity() {
 
@@ -24,7 +22,7 @@ class SignUpActivity : AppCompatActivity() {
     lateinit var binding: ActivitySignUpBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+        enableEdgeToEdge(SystemBarStyle.dark(Color.TRANSPARENT))
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -76,7 +74,7 @@ class SignUpActivity : AppCompatActivity() {
                 //storing data into firestore
                 fireRef.collection("Users")
                     .document(auth.currentUser!!.uid)
-                    .set(userModel(auth.currentUser!!.uid, name, email, password))
+                    .set(UserModel(auth.currentUser!!.uid, name, email, password))
                     .addOnSuccessListener {
                         setProgressbar(false)
                         val intent = Intent(this, MainActivity::class.java)

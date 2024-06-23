@@ -1,19 +1,19 @@
 package com.vivekupasani.linkup
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
+import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.vivekupasani.linkup.databinding.ActivityOnBoardOptionsBinding
 
-class onBoardOptions : AppCompatActivity() {
+class OnBoardOptions : AppCompatActivity() {
 
     lateinit var binding: ActivityOnBoardOptionsBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+        enableEdgeToEdge(SystemBarStyle.dark(Color.TRANSPARENT))
         binding = ActivityOnBoardOptionsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 

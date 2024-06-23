@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context=".addPostActivity">
+    tools:context=".AddPostActivity">
 
     <!--    design of post upload after add id- afterAdd -->
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -2,18 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
     <!-- Permissions for internet access and reading external storage -->
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" /> <!-- Permission to write to external storage -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- Permission to use the camera -->
+    <uses-permission android:name="android.permission.CAMERA" /> <!-- Permission to access network state -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-    <!-- Permission to write to external storage -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-
-    <!-- Permission to use the camera -->
-   <uses-permission android:name="android.permission.CAMERA"/>
-
-    <!-- Permission to access network state -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -24,9 +19,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LinkUp"
         tools:targetApi="31">
-
         <activity
-            android:name=".addPostActivity"
+            android:name=".OtherUserProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AddPostActivity"
             android:exported="false" />
         <activity
             android:name=".editProfile"
@@ -38,13 +35,13 @@
             android:name=".SignUpActivity"
             android:exported="false" />
         <activity
-            android:name=".onBoardOptions"
+            android:name=".OnBoardOptions"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".splashscreen"
+            android:name=".SplashScreenActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

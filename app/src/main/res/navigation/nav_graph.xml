@@ -9,14 +9,24 @@
         android:id="@+id/home2"
         android:name="com.vivekupasani.linkup.fragments.Home"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
-        <action
-            android:id="@+id/action_home2_to_profile2"
-            app:destination="@id/profile2" />
-    </fragment>
+        tools:layout="@layout/fragment_home" />
+
     <fragment
-        android:id="@+id/profile2"
-        android:name="com.vivekupasani.linkup.fragments.Profile"
-        android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        android:id="@+id/search2"
+        android:name="com.vivekupasani.linkup.fragments.Search"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" />
+
+    <fragment
+        android:id="@+id/currentUserProfile"
+        android:name="com.vivekupasani.linkup.fragments.CurrentUserProfile"
+        android:label="fragment_current_user_profile"
+        tools:layout="@layout/fragment_current_user_profile" />
+
+    <fragment
+        android:id="@+id/notifications"
+        android:name="com.vivekupasani.linkup.fragments.Notifications"
+        android:label="fragment_notifications"
+        tools:layout="@layout/fragment_notifications" />
+
 </navigation>

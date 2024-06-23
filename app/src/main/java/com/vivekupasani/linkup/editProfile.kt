@@ -2,10 +2,13 @@ package com.vivekupasani.linkup
 
 import android.content.DialogInterface
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.widget.Toast
+import androidx.activity.SystemBarStyle
+import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -16,7 +19,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.squareup.picasso.Picasso
 import com.vivekupasani.linkup.databinding.ActivityEditprofileBinding
-import com.vivekupasani.linkup.models.userModel
+import com.vivekupasani.linkup.models.UserModel
 
 class editProfile : AppCompatActivity() {
 
@@ -30,6 +33,7 @@ class editProfile : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge(SystemBarStyle.dark(Color.TRANSPARENT))
         binding = ActivityEditprofileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -98,7 +102,7 @@ class editProfile : AppCompatActivity() {
         val password = binding.editPassword.text.toString()
 
         val user =
-            userModel(auth.currentUser!!.uid, name, email, password, profession, bio, profilePicUrl)
+            UserModel(auth.currentUser!!.uid, name, email, password, profession, bio, profilePicUrl)
 
         firestore.collection("Users").document(auth.currentUser!!.uid)
             .set(user)
