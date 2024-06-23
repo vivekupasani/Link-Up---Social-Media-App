@@ -1,13 +1,13 @@
 package com.vivekupasani.linkup
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.vivekupasani.linkup.databinding.ActivityLogInBinding
 
@@ -18,7 +18,7 @@ class LogInActivity : AppCompatActivity() {
     lateinit var binding: ActivityLogInBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+        enableEdgeToEdge(SystemBarStyle.dark(Color.TRANSPARENT))
         binding = ActivityLogInBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
